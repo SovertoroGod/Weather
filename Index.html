@@ -15,6 +15,10 @@
             <input type="text" name="search" id="search" placeholder="Enter city name">
             <button class="searchbtn"><i class="fa-solid fa-magnifying-glass" class="iconSearch"></i></button>
         </div>
+        <div class="error">
+            <img src="image/sad.png" alt="">
+            <p>Invalid City Name</p>
+        </div>
         <div class="weather">
             <img src="image/sun.png" class="weather-icon">
             <h1 class="temp">22°C</h1>
@@ -38,51 +42,62 @@
         </div>
     </div>
     <script>
-        const searchInput = document.querySelector(".searchbar input");
-const searchBtn = document.querySelector(".searchbar button");
-const weatherIcon = document.querySelector(".weather-icon");
+            const searchInput = document.querySelector(".searchbar input");
+            const searchBtn = document.querySelector(".searchbar button");
+            const weatherIcon = document.querySelector(".weather-icon");
 
-const apiKey ="c950c34c98a78626911a4257359876cc";
-const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
-async function checkWeather(city){ 
-    const response = await fetch(apiUrl + city + `&appid=${apiKey}`);
-    var data = await response.json();
-    console.log(data); // check weather information in console
-
-    document.querySelector(".city").innerHTML = data.name;
-    document.querySelector(".temp").innerHTML = Math.round(data.main.temp )+ "°C";
-    document.querySelector(".humidity").innerHTML = data.main.humidity + " %";
-    document.querySelector(".wind").innerHTML = data.wind.speed + " km/h";
-    
-    switch (data.weather[0].main) {
-        case "Clouds":
-            weatherIcon.src = "image/brokern.png";
-            break;
-    
-        case "Clear":
-            weatherIcon.src = "image/sun.png";
-            break;   
-        
-        case "Drizzle":
-            weatherIcon.src = "image/rain.png";
-            break;  
-        case "Rain":
-            weatherIcon.src = "image/shower.png";
-            break; 
-        case "Mist":
-            weatherIcon.src = "image/mist.png";
-            break; 
-        default:
-
-            break;
-    }
+            const apiKey ="c950c34c98a78626911a4257359876cc";
+            const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+            async function checkWeather(city){ 
+                const response = await fetch(apiUrl + city + `&appid=${apiKey}`);
 
 
-}
+                if(response.status == 404){
+                    document.querySelector(".error").style.display = "block";
+                    document.querySelector(".weather").style.display = "none";
+                }
+                else{
+                    var data = await response.json();
+                console.log(data); // check weather information in console
 
-searchBtn.addEventListener("click",()=>{
-    checkWeather(searchInput.value);
-})
+                document.querySelector(".city").innerHTML = data.name;
+                document.querySelector(".temp").innerHTML = Math.round(data.main.temp )+ "°C";
+                document.querySelector(".humidity").innerHTML = data.main.humidity + " %";
+                document.querySelector(".wind").innerHTML = data.wind.speed + " km/h";
+                
+                switch (data.weather[0].main) {
+                    case "Clouds":
+                        weatherIcon.src = "image/brokern.png";
+                        break;
+                
+                    case "Clear":
+                        weatherIcon.src = "image/sun.png";
+                        break;   
+                    
+                    case "Drizzle":
+                        weatherIcon.src = "image/rain.png";
+                        break;  
+                    case "Rain":
+                        weatherIcon.src = "image/shower.png";
+                        break; 
+                    case "Mist":
+                        weatherIcon.src = "image/mist.png";
+                        break; 
+                    default:
+
+                        break;
+                }
+                document.querySelector(".weather").style.display = "block";
+                document.querySelector(".error").style.display = "none";
+
+            }
+
+            
+        }
+        searchBtn.addEventListener("click",()=>{
+                checkWeather(searchInput.value);
+            })
+                
     </script>
 
 </body>

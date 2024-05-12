@@ -5,17 +5,17 @@
     box-sizing: border-box;
 }
 body{
-    background-color: rgb(163, 153, 153);
+    background-color: rgb(159, 207, 215);
 }
 .container{
     width: 90%;
     max-width: 470px;
-    background: linear-gradient(to right, rgba(19, 248, 107, 0.674), rgb(0, 255, 187));
+    background: linear-gradient(to right, rgba(47, 214, 214, 0.874), rgb(140, 17, 223));
     margin: 10px auto 0;
     border-radius: 20px;
     padding: 40px 35px;
     text-align: center;
-    color: rgb(255, 255, 254);
+    color: rgb(215, 215, 215);
 }
 .searchbar{
     width: 100%;
@@ -28,7 +28,7 @@ body{
     border: 0;
     outline: 0;
     background: rgb(178, 243, 218);
-    color: rgb(2, 132, 245);
+    color: rgb(4, 0, 227);
     padding: 10px 25px;
     height: 40px;
     border-radius: 30px;
@@ -45,6 +45,9 @@ body{
     cursor: pointer;
     color: rgb(2, 132, 245);
     
+}
+.searchbtn i{
+    color: rgb(6, 13, 236);
 }
 .weather-icon{
     width: 170px;
@@ -84,4 +87,9 @@ body{
     font-size: 30px;
     font-weight: 200;
 }
-
+.weather{
+    display: none;
+}
+.error{
+    display: none;
+}
